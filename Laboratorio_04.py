@@ -8,12 +8,12 @@ class Participante:
     def mostrar_info(self):
         return f"{self.nombre} - {self.institucion}"
 
-
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
     ventana_inscribir = tk.Toplevel(ventana)
     ventana_inscribir.title("Inscribir Banda")
     ventana_inscribir.geometry("400x300")
+
 
 def registrar_evaluacion():
     print("Se abrió la ventana: Registrar Evaluación")
