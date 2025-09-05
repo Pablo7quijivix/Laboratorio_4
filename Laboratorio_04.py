@@ -32,6 +32,42 @@ class BandaEscolar(Participante):
                 raise ValueError("Puntajes deben estar entre 0 y 10")
         self._puntajes = puntajes
 
+    @property
+    def total(self):
+        return sum(self._puntajes.values()) if self._puntajes else 0
+
+    def mostrar_info(self):
+        base = super().mostrar_info()
+        if self._puntajes:
+            return f"{base} | {self._categoria} | Total: {self.total}"
+        return f"{base} | {self._categoria} | Sin evaluar"
+
+class Concurso:
+    def __init__(self, nombre, fecha):
+        self.nombre = nombre
+        self.fecha = fecha
+        self.bandas = {}
+
+    def inscribir_banda(self, banda):
+        if banda.nombre in self.bandas:
+            raise ValueError("Ya existe una banda con ese nombre")
+        self.bandas[banda.nombre] = banda
+
+    def registrar_evaluacion(self, nombre_banda, puntajes):
+        if nombre_banda not in self.bandas:
+            raise ValueError("Banda no inscrita")
+        self.bandas[nombre_banda].registrar_puntajes(puntajes)
+
+    def listar_bandas(self):
+        return [b.mostrar_info() for b in self.bandas.values()]
+
+    def ranking(self):
+        return sorted(
+            self.bandas.values(),
+            key=lambda b: (b.total),
+            reverse=True
+        )
+
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
     ventana_inscribir = tk.Toplevel(ventana)
