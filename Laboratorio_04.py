@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class Participante:
     def __init__(self, nombre, institucion):
         self.nombre = nombre
@@ -8,6 +7,7 @@ class Participante:
 
     def mostrar_info(self):
         return f"{self.nombre} - {self.institucion}"
+
 
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
