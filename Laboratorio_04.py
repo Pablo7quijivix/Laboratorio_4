@@ -1,6 +1,12 @@
-#print("print inicial")
-
 import tkinter as tk
+
+class Participante:
+    def __init__(self, nombre, institucion):
+        self.nombre = nombre
+        self.institucion = institucion
+
+    def mostrar_info(self):
+        return f"{self.nombre} - {self.institucion}"
 
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
