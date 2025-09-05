@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class Participante:
     def __init__(self, nombre, institucion):
         self.nombre = nombre
