@@ -8,6 +8,30 @@ class Participante:
     def mostrar_info(self):
         return f"{self.nombre} - {self.institucion}"
 
+class BandaEscolar(Participante):
+    categorias_validas = ["Primaria", "Basico", "Diversificado"]
+    criterios_validos = ["ritmo", "uniformidad", "coreografia", "alineacion", "puntualidad"]
+
+    def __init__(self, nombre, institucion, categoria):
+        super().__init__(nombre, institucion)
+        self._categoria = None
+        self._puntajes = {}
+        self.set_categoria(categoria)
+
+    def set_categoria(self, categoria):
+        if categoria in BandaEscolar.categorias_validas:
+            self._categoria = categoria
+        else:
+            raise ValueError("--Categoria Invalida, Intente de nuevo--")
+
+    def registrar_puntajes(self, puntajes):
+        if set(puntajes.keys()) != set(BandaEscolar.criterios_validos):
+            raise ValueError("Criterios incompletos o incorrectos")
+        for criterio, valor in puntajes.items():
+            if not (0 <= valor <= 10):
+                raise ValueError("Puntajes deben estar entre 0 y 10")
+        self._puntajes = puntajes
+
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
     ventana_inscribir = tk.Toplevel(ventana)
