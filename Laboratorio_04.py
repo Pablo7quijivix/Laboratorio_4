@@ -1,13 +1,15 @@
 import tkinter as tk
-
+#clase principal con atributos nombre e institucion para ir heredadndo cunado estas lo requieran
 class Participante:
     def __init__(self, nombre, institucion):
         self.nombre = nombre
         self.institucion = institucion
 
+# metodo mostrar para mostrar la informacion concatenada del "Nombre-institucion ejemplo: Shekina-Academia Musical"
     def mostrar_info(self):
         return f"{self.nombre} - {self.institucion}"
 
+#Clase BandaESscolar que hereda los atrinutos de la clase participantes
 class BandaEscolar(Participante):
     categorias_validas = ["Primaria", "Basico", "Diversificado"]
     criterios_validos = ["ritmo", "uniformidad", "coreografia", "alineacion", "puntualidad"]
@@ -67,12 +69,47 @@ class Concurso:
             key=lambda b: (b.total),
             reverse=True
         )
+# inicio de la logica de nuestro programa
+#mensaje inicial que se muestra en pantalla cuando se corre el programa
+concurso = Concurso("Concurso de Bandas - 15 de Septiembre", "2025-09-15")
+tk.messagebox = __import__("tkinter.messagebox")
 
+# -----------primeras funciones de la interfaz--------------------------
+# se creo una funcion en donde se crearon cada uno de los votones para ser llamadas a traves de su comando
+def abrir_menu():
+    menu = tk.Toplevel(ventana)
+    menu.title("Opciones")
+    menu.geometry("300x300")
+    tk.Button(menu, text="Inscribir banda", width=25, command=inscribir_banda).pack(pady=5)
+    tk.Button(menu, text= "Registrar Evaluacion", width=25, command=registrar_evaluacion).pack(pady=5)
+    tk.Button(menu, text= "Listar Bandas", width=25, command= listar_bandas).pack(pady=5)
+    tk.Button(menu, text= "Ver Ranking", width=25, cammand= ver_ranking).pack(pady=5)
+    tk.Button(menu, text="Regresar", width=25, command= menu.destroy).pack(pady=5)
+
+
+
+# ventana "inscribir_banda" la renombramos como "win" de window
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
-    ventana_inscribir = tk.Toplevel(ventana)
-    ventana_inscribir.title("Inscribir Banda")
-    ventana_inscribir.geometry("400x300")
+    win= tk.Toplevel(ventana)
+    win.title("Inscribir Banda")
+    win.geometry("400x300")
+
+
+    tk.Label(win, text="Nombre de la Banda:").pack()
+    entry_nombre = tk.Entry(win)
+    entry_nombre.pack()
+
+    tk.Label(win, texto="Nommbre de la Institucion:").pack()
+    entry_institucion = tk.Entry(win)
+    entry_institucion.pack()
+
+    tk.Label(win, text="Categoria (Primaria, Basico, Diversificado").pack()
+    entry_categoria = tk.Entry(win)
+    entry_categoria.pack()
+
+    mensaje= tk.Label(win, text= "", fg="red")
+    mensaje.pack()
 
 
 def registrar_evaluacion():
