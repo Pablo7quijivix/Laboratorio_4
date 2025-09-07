@@ -111,6 +111,29 @@ def inscribir_banda():
     mensaje= tk.Label(win, text= "", fg="red")
     mensaje.pack()
 
+    def guardar(): #programando funcion para guardar los datos de nombre, institucion, categoria de cada banda
+        nombre = entry_nombre.get().strip()
+        institucion = entry_institucion.get().strip()
+        categoria = entry_categoria.get().strip().capitalize()
+        try:
+            banda =BandaEscolar(nombre, institucion, categoria)
+            concurso.inscribir_banda(banda)
+            mensaje.config(text="informacion guardada correctamente.", fg="green")
+        except Exception as e:
+            mensaje.config(text=f" {str(e)}", fg="red")
+
+    def limpiar(): # funcion para borrar los datos de las casillas e ingreasr nuevos datos
+        entry_nombre.delete(0, tk.END)
+        entry_institucion.delete(0, tk.END)
+        entry_categoria.delete(0, tk.END)
+        mensaje.config(text="")
+
+    # programando el funcionamiento de los botones de la ventana
+    tk.Button(win, text="Guardar", command=guardar).pack(pady=5)
+    tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
+    tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
+
+
 
 def registrar_evaluacion():
     print("Se abrió la ventana: Registrar Evaluación")
