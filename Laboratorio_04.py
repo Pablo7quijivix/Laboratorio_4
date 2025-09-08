@@ -88,18 +88,6 @@ def abrir_menu():
     tk.Button(menu, text="Regresar", width=25, command=menu.destroy).pack(pady=5)
 
 
-
-# ventana "inscribir_banda" la renombramos como "win" de window
-    menu = tk.Toplevel(ventana)
-    menu.title("Opciones")
-    menu.geometry("300x300")
-
-    tk.Button(menu, text="Inscribir Banda", width=25, command=inscribir_banda).pack(pady=5)
-    tk.Button(menu, text="Registrar Evaluación", width=25, command=registrar_evaluacion).pack(pady=5)
-    tk.Button(menu, text="Listar Bandas", width=25, command=listar_bandas).pack(pady=5)
-    tk.Button(menu, text="Ver Ranking", width=25, command=ver_ranking).pack(pady=5)
-    tk.Button(menu, text="Regresar", width=25, command=menu.destroy).pack(pady=5)
-
 # ---------- INSCRIPCIÓN ----------
 def inscribir_banda():
     win = tk.Toplevel(ventana)
