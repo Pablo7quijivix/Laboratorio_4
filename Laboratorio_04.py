@@ -133,37 +133,42 @@ def inscribir_banda():
     tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
     tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
 
-
-
 def registrar_evaluacion():
-    print("Se abrió la ventana: Registrar Evaluación")
     win = tk.Toplevel(ventana)
     win.title("Registrar Evaluación")
-    win.geometry("400x300")
+    win.geometry("400x400")
 
-    tk.Label(win, text= "Nombre de la banda:").pack()
-    entry_nombre= tk.Entry(win)
+    tk.Label(win, text="Nombre de la Banda:").pack()
+    entry_nombre = tk.Entry(win)
     entry_nombre.pack()
 
-    entradas ={}
+    entradas = {}
     for crit in BandaEscolar.criterios_validos:
         tk.Label(win, text=crit.capitalize()).pack()
-        entradas[crit] =tk.Entry(win)
+        entradas[crit] = tk.Entry(win)
         entradas[crit].pack()
 
-    mensaje =tk.Label(win, text="", fg= "red")
+    mensaje = tk.Label(win, text="", fg="red")
     mensaje.pack()
 
     def guardar():
         nombre = entry_nombre.get().strip()
         try:
-            puntajes = {c:int(e.get()) for c, e in entradas.items()}
+            puntajes = {c: int(e.get()) for c, e in entradas.items()}
             concurso.registrar_evaluacion(nombre, puntajes)
             mensaje.config(text=" Evaluación guardada correctamente.", fg="green")
         except Exception as e:
-            mensaje.config(text= f"{str(e)}", fg= "red")
+            mensaje.config(text=f" {str(e)}", fg="red")
 
+    def limpiar():
+        entry_nombre.delete(0, tk.END)
+        for e in entradas.values():
+            e.delete(0, tk.END)
+        mensaje.config(text="")
 
+    tk.Button(win, text="Guardar", command=guardar).pack(pady=5)
+    tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
+    tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
 
 def listar_bandas():
     print("Se abrió la ventana: Listado de Bandas")
