@@ -80,36 +80,47 @@ def abrir_menu():
     menu = tk.Toplevel(ventana)
     menu.title("Opciones")
     menu.geometry("300x300")
-    tk.Button(menu, text="Inscribir banda", width=25, command=inscribir_banda).pack(pady=5)
-    tk.Button(menu, text= "Registrar Evaluacion", width=25, command=registrar_evaluacion).pack(pady=5)
-    tk.Button(menu, text= "Listar Bandas", width=25, command= listar_bandas).pack(pady=5)
-    tk.Button(menu, text= "Ver Ranking", width=25, cammand= ver_ranking).pack(pady=5)
-    tk.Button(menu, text="Regresar", width=25, command= menu.destroy).pack(pady=5)
+
+    tk.Button(menu, text="Inscribir Banda", width=25, command=inscribir_banda).pack(pady=5)
+    tk.Button(menu, text="Registrar Evaluación", width=25, command=registrar_evaluacion).pack(pady=5)
+    tk.Button(menu, text="Listar Bandas", width=25, command=listar_bandas).pack(pady=5)
+    tk.Button(menu, text="Ver Ranking", width=25, command=ver_ranking).pack(pady=5)
+    tk.Button(menu, text="Regresar", width=25, command=menu.destroy).pack(pady=5)
 
 
 
 # ventana "inscribir_banda" la renombramos como "win" de window
+    menu = tk.Toplevel(ventana)
+    menu.title("Opciones")
+    menu.geometry("300x300")
+
+    tk.Button(menu, text="Inscribir Banda", width=25, command=inscribir_banda).pack(pady=5)
+    tk.Button(menu, text="Registrar Evaluación", width=25, command=registrar_evaluacion).pack(pady=5)
+    tk.Button(menu, text="Listar Bandas", width=25, command=listar_bandas).pack(pady=5)
+    tk.Button(menu, text="Ver Ranking", width=25, command=ver_ranking).pack(pady=5)
+    tk.Button(menu, text="Regresar", width=25, command=menu.destroy).pack(pady=5)
+
+# ---------- INSCRIPCIÓN ----------
 def inscribir_banda():
-    print("Se abrió la ventana: Inscribir Banda")
-    win= tk.Toplevel(ventana)
+    win = tk.Toplevel(ventana)
     win.title("Inscribir Banda")
     win.geometry("400x300")
-
 
     tk.Label(win, text="Nombre de la Banda:").pack()
     entry_nombre = tk.Entry(win)
     entry_nombre.pack()
 
-    tk.Label(win, texto="Nommbre de la Institucion:").pack()
+    tk.Label(win, text="Institución:").pack()
     entry_institucion = tk.Entry(win)
     entry_institucion.pack()
 
-    tk.Label(win, text="Categoria (Primaria, Basico, Diversificado").pack()
+    tk.Label(win, text="Categoría (Primaria, Básico, Diversificado):").pack()
     entry_categoria = tk.Entry(win)
     entry_categoria.pack()
 
-    mensaje= tk.Label(win, text= "", fg="red")
+    mensaje = tk.Label(win, text="", fg="red")
     mensaje.pack()
+
 
     def guardar(): #programando funcion para guardar los datos de nombre, institucion, categoria de cada banda
         nombre = entry_nombre.get().strip()
