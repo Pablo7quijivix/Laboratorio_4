@@ -173,49 +173,54 @@ def registrar_evaluacion():
     tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
     tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
 
+def listar_bandas(): # ventana para mostrar todas las bandas inscritas
+    win = tk.Toplevel(ventana)
+    win.title("Listado de Bandas")
+    win.geometry("400x300")
 
-def listar_bandas():
-    print("Se abrió la ventana: Listado de Bandas")
-    ventana_listado = tk.Toplevel(ventana)
-    ventana_listado.title("Listado de Bandas")
-    ventana_listado.geometry("400x300")
+    bandas = concurso.listar_bandas()
+    if not bandas:
+        tk.Label(win, text="No hay bandas inscritas").pack()
+    else:
+        for b in bandas:
+            tk.Label(win, text=b).pack()
 
-def ver_ranking():
-    print("Se abrió la ventana: Ranking Final")
-    ventana_ranking = tk.Toplevel(ventana)
-    ventana_ranking.title("Ranking Final")
-    ventana_ranking.geometry("400x300")
+    # boton para regresar y cerrar la ventana
+    tk.Button(win, text="Regresar", command=win.destroy).pack(pady=10)
 
-def salir():
-    print("Aplicación cerrada")
+def ver_ranking(): # ventana para mostrar el ranking final de las bandas evaluadas
+    win = tk.Toplevel(ventana)
+    win.title("Ranking Final")
+    win.geometry("400x300")
+
+    ranking = concurso.ranking()
+    if not ranking:
+        tk.Label(win, text="No hay bandas evaluadas").pack()
+    else:
+        for i, b in enumerate(ranking, start=1):
+            tk.Label(win, text=f"{i}. {b.nombre} | {b.institucion} | {b._categoria} | Total: {b.total}").pack()
+
+    # boton para regresar y cerrar la ventana
+    tk.Button(win, text="Regresar", command=win.destroy).pack(pady=10)
+
+def salir(): # funcion para cerrar la aplicación
     ventana.quit()
 
+#Interfaz principal
 ventana = tk.Tk()
 ventana.title("Concurso de Bandas - Quetzaltenango")
 ventana.geometry("500x300")
 
-etiqueta = tk.Label(ventana, text= "Eliga una accion del menu")
-etiqueta.pack(pady=5)
-barra_menu = tk.Menu(ventana)
-
-menu_opciones = tk.Menu(barra_menu, tearoff=0)
-menu_opciones.add_command(label="Inscribir Banda", command=inscribir_banda)
-menu_opciones.add_command(label="Registrar Evaluación", command=registrar_evaluacion)
-menu_opciones.add_command(label="Listar Bandas", command=listar_bandas)
-menu_opciones.add_command(label="Ver Ranking", command=ver_ranking)
-menu_opciones.add_separator()
-menu_opciones.add_command(label="Salir", command=salir)
-
-barra_menu.add_cascade(label="Opciones", menu=menu_opciones)
-
-ventana.config(menu=barra_menu)
-
-etiqueta = tk.Label(
+# etiqueta con el título principal del sistema
+tk.Label(
     ventana,
     text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
     font=("Arial", 12, "bold"),
     justify="center"
-)
-etiqueta.pack(pady=50)
+).pack(pady=30)
+
+# botones principales de la ventana inicial
+tk.Button(ventana, text="Abrir Opciones", width=30, command=abrir_menu).pack(pady=10)
+tk.Button(ventana, text="Salir", width=30, command=salir).pack(pady=10)
 
 ventana.mainloop()
