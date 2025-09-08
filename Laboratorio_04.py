@@ -137,9 +137,20 @@ def inscribir_banda():
 
 def registrar_evaluacion():
     print("Se abrió la ventana: Registrar Evaluación")
-    ventana_eval = tk.Toplevel(ventana)
-    ventana_eval.title("Registrar Evaluación")
-    ventana_eval.geometry("400x300")
+    win = tk.Toplevel(ventana)
+    win.title("Registrar Evaluación")
+    win.geometry("400x300")
+
+    tk.Label(win, text= "Nombre de la banda:").pack()
+    entry_nombre= tk.Entry(win)
+    entry_nombre.pack()
+
+    entradas ={}
+    for crit in BandaEscola.criterios_validos:
+        tk.Label(win, text=crit.capitalize()).pack()
+        entradas[crit] =tk.Entry(win)
+        entradas[crit].pack()
+
 
 def listar_bandas():
     print("Se abrió la ventana: Listado de Bandas")
