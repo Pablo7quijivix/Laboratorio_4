@@ -159,7 +159,9 @@ def registrar_evaluacion():
         try:
             puntajes = {c:int(e.get()) for c, e in entradas.items()}
             concurso.registrar_evaluacion(nombre, puntajes)
-            mensaje.config(text=f"{str(e)}", fg= "red")
+            mensaje.config(text=" Evaluación guardada correctamente.", fg="green")
+        except Exception as e:
+            mensaje.config(text= f"{str(e)}", fg= "red")
 
 
 
