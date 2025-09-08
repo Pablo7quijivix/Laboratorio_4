@@ -146,10 +146,21 @@ def registrar_evaluacion():
     entry_nombre.pack()
 
     entradas ={}
-    for crit in BandaEscola.criterios_validos:
+    for crit in BandaEscolar.criterios_validos:
         tk.Label(win, text=crit.capitalize()).pack()
         entradas[crit] =tk.Entry(win)
         entradas[crit].pack()
+
+    mensaje =tk.Label(win, text="", fg= "red")
+    mensaje.pack()
+
+    def guardar():
+        nombre = entry_nombre.get().strip()
+        try:
+            puntajes = {c:int(e.get()) for c, e in entradas.items()}
+            concurso.registrar_evaluacion(nombre, puntajes)
+            mensaje.config(text=f"{str(e)}", fg= "red")
+
 
 
 def listar_bandas():
