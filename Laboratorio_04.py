@@ -133,6 +133,7 @@ def inscribir_banda():
     tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
     tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
 
+# ventana "registrar_evaluacion" la renombramos como "win" de window
 def registrar_evaluacion():
     win = tk.Toplevel(ventana)
     win.title("Registrar Evaluación")
@@ -142,6 +143,7 @@ def registrar_evaluacion():
     entry_nombre = tk.Entry(win)
     entry_nombre.pack()
 
+    # creando casillas de texto para ingresar cada criterio de la evaluación
     entradas = {}
     for crit in BandaEscolar.criterios_validos:
         tk.Label(win, text=crit.capitalize()).pack()
@@ -151,7 +153,7 @@ def registrar_evaluacion():
     mensaje = tk.Label(win, text="", fg="red")
     mensaje.pack()
 
-    def guardar():
+    def guardar(): # funcion para guardar los datos de nombre y puntajes de cada criterio
         nombre = entry_nombre.get().strip()
         try:
             puntajes = {c: int(e.get()) for c, e in entradas.items()}
@@ -160,15 +162,17 @@ def registrar_evaluacion():
         except Exception as e:
             mensaje.config(text=f" {str(e)}", fg="red")
 
-    def limpiar():
+    def limpiar(): # funcion para borrar los datos de las casillas e ingresar nuevos datos
         entry_nombre.delete(0, tk.END)
         for e in entradas.values():
             e.delete(0, tk.END)
         mensaje.config(text="")
 
+    # programando el funcionamiento de los botones de la ventana
     tk.Button(win, text="Guardar", command=guardar).pack(pady=5)
     tk.Button(win, text="Limpiar", command=limpiar).pack(pady=5)
     tk.Button(win, text="Regresar", command=win.destroy).pack(pady=5)
+
 
 def listar_bandas():
     print("Se abrió la ventana: Listado de Bandas")
